@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bayad Utang</title>
+  </head>
+  <body>
+    <form action="/test" id="test" method="post">
+      <h4 for="name">Name:</h4>
+      <input type="text" id="name" name="name" required />
+
+      <h4 for="money">Amount to Borrow:</h4>
+      <input type="number" id="money" required />
+
+      <h3>I will pay within:</h3>
+      <h4 for="month">Month:</h4>
+      <select id="month" required>
+        <option value="january">January</option>
+        <option value="february">February</option>
+        <option value="march">March</option>
+        <option value="april">April</option>
+        <option value="may">May</option>
+        <option value="june">June</option>
+        <option value="july">July</option>
+        <option value="august">August</option>
+        <option value="september">September</option>
+        <option value="october">October</option>
+        <option value="november">November</option>
+        <option value="december">December</option>
+      </select>
+
+      <h4 for="day">Day:</h4>
+      <input type="number" id="day" min="1" max="31" required />
+      <br /><br />
+
+      <button type="submit"()">Submit</button>
+    </form>
+  </body>
+  <script>
+    let name = document.getElementById("name").value;
+    let money = document.getElementById("money").value;
+    let month = document.getElementById("month").value;
+    let day = document.getElementById("day").value
+
+    document.getElementById("test").addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      let name = document.getElementById("name").value;
+      let money = document.getElementById("money").value;
+      let month = document.getElementById("month").value;
+      let day = document.getElementById("day").value;
+
+      try {
+        const response = await fetch('/test', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: name,
+            money: money,
+            month: month,
+            day: day
+          })
+        });
+
+        const result = await response.json();
+        console.log("result: ", result);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    })
+  </script>
+</html>
